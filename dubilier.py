@@ -5,11 +5,20 @@
 
 import os
 import sys
+import sqlite3
 import logging
 import argparse
 import datetime
 import discord.ext.tasks
 import discord.ext.commands
+
+
+class DB:
+
+    def __init__(self, path: str) -> None:
+        super().__init__()
+        self._conn = None
+        self.path = path
 
 
 class Dubilier(discord.ext.commands.Bot):
