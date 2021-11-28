@@ -2,45 +2,33 @@
 """
 
 
-import os
-import sqlite3
+import sqlalchemy
+import sqlalchemy.orm
 
 
-class Error(Exception):
+DBBase = sqlalchemy.orm.declarative_base()
+
+
+class DB:
     """
     """
+    DB_URL = "sqlite://{path}"
 
-
-class Connection:
-    """
-    """
-
-    def __init__(self, path: str) -> None:
-        """
+    def __init__(self, **kwargs: dict) -> None:
+        """Initializes the DB object.
         """
         super().__init__()
-        self._conn = None
-        self.path = path
+        self._engine = None
+        self.path = kwargs.get("path", ":memory:")
 
-    def connection(self) -> sqlite3.Connection:
+    def db_url(self) -> str:
+        """
+        """        
+        return self.DB_URL.format(path=self.path)
+
+    def engine(self) -> sqlalchemy.engine.Engine:
         """
         """
-        if self._conn is None:
-            self._conn = sqlite3.connect(self.path)
-        return self._conn
-
-
-class Mixin:
-    """
-    """
-    SCHEMA = None
-
-    def prepare(self, db: Connection) -> None:
-        """
-        """
-        conn = db.connection()
-        try:
-            cur = conn.cursor()
-            cur.execute(self.SCHEMA)
-        except sqlite3.Error as e:
-            raise Error(e)
+        if self._engine is None:
+            self._engine = sqlalchemy.create_engine(self.db_url)
+        return self._engine
