@@ -17,15 +17,13 @@ class Bot(discord.ext.commands.Bot):
         super().__init__(
             command_prefix=kwargs.get("prefix", self.DEFAULT_PREFIX),
         )
-        self.db = db.Connection(path=kwargs.get("db_path", ":memory:"))
+        self.db = db.DB(path=kwargs.get("db_path", None))
         self.token = kwargs.get("token", None)
 
     def add_cmd(self, command: commands.Command) -> None:
         """
         """
-        cmd = command(self)
-        if hasattr(command, "SCHEMA"):
-            cmd.prepare(db=self.db)
+        cmd = command(bot=self, db=self.db)
         self.add_cog(cmd)
 
     def run(self) -> None:
