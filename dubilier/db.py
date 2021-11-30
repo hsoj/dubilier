@@ -4,9 +4,10 @@
 
 import sqlalchemy
 import sqlalchemy.orm
+import sqlalchemy.ext.declarative
 
 
-DBBase = sqlalchemy.orm.declarative_base()
+Base = sqlalchemy.orm.declarative_base()
 
 
 class DB:
@@ -19,6 +20,7 @@ class DB:
         """
         super().__init__()
         self._engine = None
+        self._session = None
         self.path = kwargs.get("path", ":memory:")
 
     def db_url(self) -> str:
@@ -30,5 +32,24 @@ class DB:
         """
         """
         if self._engine is None:
-            self._engine = sqlalchemy.create_engine(self.db_url)
+            self._engine = sqlalchemy.create_engine(self.db_url())
+            Base.metadata.create_all(self._engine)
         return self._engine
+
+    def session(self) -> sqlalchemy.orm.Session:
+        """
+        """
+        if self._session is None:
+            self._session = sqlalchemy.orm.sessionmaker(self.engine())
+        return self._session
+
+
+class Mixin:
+    """
+    """
+
+    @sqlalchemy.ext.declarative.declared_attr
+    def __tablename__(self):
+        return self.__name__.lower()
+
+    id = sqlalchemy.Column(sqlalchemy.Integer, primary_key=True)
