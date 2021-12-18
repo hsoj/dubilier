@@ -7,6 +7,7 @@ import os
 import logging
 import argparse
 import dubilier.bot
+import dubilier.user
 import dubilier.scheduler
 
 
@@ -37,6 +38,7 @@ def main():
     dub = dubilier.bot.Bot(db_path=args.path,
                            token=args.token)
     dub.add_cmd(dubilier.scheduler.Command)
+    dub.add_cmd(dubilier.user.Command)
     dub.run()
 
 
