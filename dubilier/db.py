@@ -2,6 +2,7 @@
 """
 
 
+from typing import Any
 import sqlalchemy
 import sqlalchemy.orm
 import sqlalchemy.ext.declarative
@@ -35,6 +36,39 @@ class DB:
             self._engine = sqlalchemy.create_engine(self.db_url())
             Base.metadata.create_all(self._engine)
         return self._engine
+
+    def get(self, obj: Any, **kwargs: dict) -> Any:
+        """
+        """
+        session_scope = self.session()
+        with session_scope() as session:
+            results = session.query(obj).filter_by(**kwargs)
+            if results.count():
+                return results
+        return None
+
+    def insert(self, obj: Any) -> None:
+        """
+        """
+        session_scope = self.session()
+        with session_scope() as session:
+            with session.begin():
+                try:
+                    session.add(obj)
+                except sqlalchemy.ext.InvalidRequestError:
+                    cur_sessions = session.object_sessions(obj)
+                    cur_sessions.add(obj)
+        return obj
+
+    def update(self, obj: Any) -> None:
+        """
+        """
+        session_scope = self.session()
+        with session_scope() as session:
+            obj_session = session.object_session(obj)
+            obj_session.add(obj)
+            obj_session.commit()
+        return obj
 
     def session(self) -> sqlalchemy.orm.Session:
         """
