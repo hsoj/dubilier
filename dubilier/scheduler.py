@@ -2,6 +2,7 @@
 """
 
 
+import pytz
 import datetime
 import sqlalchemy
 import discord.ext.commands
@@ -48,8 +49,7 @@ class ScheduleField(db.Mixin,
     value = sqlalchemy.Column(sqlalchemy.String)
 
 
-class Command(db.Mixin,
-              commands.Command):
+class Command(commands.Command):
     """
     """
 
@@ -76,9 +76,9 @@ class Command(db.Mixin,
         session_scope = self.db.session()
         with session_scope() as session:
             schedule = session.query(Schedule).filter(Schedule.name==name)
-        if not schedule.count():
-            return None
-        return schedule.first()
+            if schedule.count():
+                return schedule.first()
+        return None
 
     @discord.ext.commands.command()
     async def schedule(self, ctx, sub_command: str, *configs: str) -> None:
@@ -102,5 +102,13 @@ class Command(db.Mixin,
         time_tag = self._build_time_tag(timestamp=time_str)
         await ctx.send(out_msg.format(tag=time_tag))
 
+    @discord.ext.commands.command()
+    async def utctime(self, ctx) -> None:
+        """
+        """
+        out_msg = "UTC time is {tag}"
+        time_str = datetime.datetime.utcnow().strftime("%s")
+        time_tag = self._build_time_tag(timestamp=time_str)
+        await ctx.send(out_msg.format(tag=time_tag))
 
 
