@@ -2,12 +2,14 @@
 
 
 import unittest
+import unittest.mock
 import click.testing
 import dubilier.bot.cli
 
 class TestBotCLI(unittest.TestCase):
 
-    def test_run(self) -> None:
+    @unittest.mock.patch("discord.ext.commands.Bot")
+    def test_run(self, mock: unittest.mock.Mock) -> None:
         args: list[str] = [
             "run",
             "-p test_db_path",
@@ -16,4 +18,6 @@ class TestBotCLI(unittest.TestCase):
         runner: click.testing.CliRunner = click.testing.CliRunner()
         result: click.testing.Result = runner.invoke(dubilier.bot.cli.main,
                                                      args)
+        bot_mock: unittest.mock.Mock = mock.return_value
+        bot_mock.run.exit_code = 0
         self.assertEqual(result.exit_code, 0)

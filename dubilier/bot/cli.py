@@ -2,6 +2,7 @@
 
 
 import click
+import dubilier.bot.discord
 
 
 @click.group()
@@ -17,3 +18,7 @@ def main() -> None:
 @click.option("-t", "token", default=None, help="Token to auth to Discord")
 def run(db_path: str, token: str) -> None:
     """Start the bot daemon"""
+    daemon: dubilier.bot.discord.Daemon = dubilier.bot.discord.Daemon(
+        token=token,
+    )
+    daemon.run()
