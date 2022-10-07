@@ -7,17 +7,6 @@ import discord.flags
 import discord.ext.commands
 
 
-class Intents(discord.flags.Intents):
-    """Extend the discord.Intents object to ensure that proper linting
-    is provided.
-    """
-    __slots__: tuple[str] = ("message_content",)
-
-    def __init__(self) -> None:
-        super().__init__()
-        self.message_content = super().message_content
-
-
 class Daemon:
     """Provide the connection to discord and maintain it."""
     DEFAULT_PREFIX: str = "?"
@@ -33,8 +22,7 @@ class Daemon:
     def bot(self) -> discord.ext.commands.Bot:
         """Property method to lazy load the Discord Bot object."""
         if self._bot is None:
-            intents: Intents = Intents()
-            intents.message_content = True
+            intents: discord.flags.Intents = discord.Intents.all()
             self._bot = discord.ext.commands.Bot(command_prefix=self.prefix,
                                                  intents=intents)
         return self._bot
