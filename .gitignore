@@ -1,8 +1,10 @@
 .tox/
 .venv/
 .vscode/
+build/*
 __pycache__/*
 */__pycache__/*
 *.egg-info/
 *.db
 *.py[cod]
+.coverage
