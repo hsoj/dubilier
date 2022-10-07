@@ -5,13 +5,13 @@ import click
 import dubilier.bot.discord
 
 
-@click.group()
-def main() -> None:
-    """Main CLI group"""
+@click.group(name="bot")
+def group() -> None:
+    """Commands for dealing with the Dubilier bot."""
 
 
 # pylint: disable=unused-argument
-@main.command()
+@group.command()
 @click.option("-p", "db_path",
               default=None,
               help="Path to the sqlite database")
