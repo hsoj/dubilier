@@ -1,7 +1,8 @@
 """Entry point to execute the bot"""
 
 
-import dubilier.bot
+import dubilier.bot.cli
 
-
-dubilier.bot.cli.main()
+def main() -> None:
+    """Provides entry point functionality for the bot."""
+    dubilier.bot.cli.main()

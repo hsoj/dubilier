@@ -1,8 +1,18 @@
 repos:
 - repo: local
   hooks:
+    - id: pytest
+      name: pytest
+      entry: pytest
+      language: system
+      files: ^dubilier/
     - id: pylint
       name: pylint
       entry: pylint
+      language: system
+      files: ^dubilier/
+    - id: mypy
+      name: mypy
+      entry: mypy
       language: system
       files: ^dubilier/

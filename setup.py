@@ -1,6 +1,7 @@
 """Dubilier Python setuptools configuration.
 """
 
+
 import setuptools
 
 
@@ -14,6 +15,12 @@ setuptools.setup(
     extras_require={
         "dev": [
             "pytest", "pylint", "tox", "mypy", "yapf", "pre-commit",
+            "coverage",
         ]
+    },
+    entry_points={
+        "console_scripts": {
+            "dubilier = dubilier.__main__:main"
+        }
     }
 )
