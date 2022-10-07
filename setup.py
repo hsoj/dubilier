@@ -11,9 +11,9 @@ setuptools.setup(
         "click",
         "discord.py",
     ],
-    extra_requires={
+    extras_require={
         "dev": [
-            "pytest", "pylint", "tox", "mypy", "yapf",
+            "pytest", "pylint", "tox", "mypy", "yapf", "pre-commit",
         ]
     }
 )
