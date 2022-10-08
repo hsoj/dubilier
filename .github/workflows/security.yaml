@@ -3,8 +3,7 @@ on:
   push:
     branches:
       - develop
-  pull_requests:
-    branches:
+    pull_requests:
       - develop
       - main
 permissions:
