@@ -11,6 +11,7 @@ setuptools.setup(
     install_requires=[
         "click",
         "discord.py",
+        "sqlalchemy",
     ],
     extras_require={
         "dev": [
