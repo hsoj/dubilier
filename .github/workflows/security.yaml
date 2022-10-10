@@ -27,8 +27,8 @@ jobs:
         uses: actions/dependency-review-action@v2
         if: ${{ ! github.event_name.pull_request }}
         with:
-          base_ref: ${{ github.ref }}
-          head_ref: ${{ github.ref }}
+          base-ref: ${{ github.ref }}
+          head-ref: ${{ github.ref }}
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v2
         with:
