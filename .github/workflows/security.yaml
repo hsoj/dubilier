@@ -2,9 +2,10 @@ name: Security checks
 on:
   push:
     branches:
-      - develop
-    pull_requests:
-      - develop
+    - develop
+  pull_requests:
+    branches:
+    - develop
 permissions:
   actions: read
   contents: read
