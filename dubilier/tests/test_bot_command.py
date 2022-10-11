@@ -9,6 +9,8 @@ import dubilier.bot.command
 
 class TestBase(unittest.TestCase):
 
+    def setUp(self) -> None:
+        self.command: dubilier.bot.command.Base = dubilier.bot.command.Base()
+
     def test_constructor(self) -> None:
-        command: dubilier.bot.command.Base = dubilier.bot.command.Base()
-        self.assertIsInstance(command, discord.ext.commands.Cog)
+        self.assertIsInstance(self.command, discord.ext.commands.Cog)
