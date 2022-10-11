@@ -1,0 +1,47 @@
+name: Feature
+description: Feature request
+labels:
+  - enhancement
+body:
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+      description: |
+        Give some context as to what the feature is and why it is wanted.
+      placeholder: We want this feature to do this thing.
+    validations:
+      required: true
+  - type: textarea
+    id: out-of-scope
+    attributes:
+      label: Out of scope
+      description: |
+        Any items that are considered out of scope for this effort.
+      placeholder: |
+        e.g,
+        * Does not need to populate database
+    validations:
+      required: false
+  - type: textarea
+    id: acceptance-criteria
+    attributes:
+      label: Acceptance criteria
+      description: |
+        Expectations of what the effort provides at completion.
+      placeholder: |
+        e.g,
+        * Tests are added and all tests pass
+        * Documentation is provided and linked to the issue
+    validations:
+      required: true
+  - type: textarea
+    id: technical-notes
+    attributes:
+      label: Technical notes
+      description: |
+        Any technical notes that may help understand the context of the 
+        effort.
+    validations:
+      required: false
+    
