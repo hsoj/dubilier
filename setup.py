@@ -8,6 +8,8 @@ import setuptools
 setuptools.setup(
     name="dubilier",
     version="0.0.1",
+    include_package_data=True,
+    packages=setuptools.find_packages(exclude=["*tests*"]),
     install_requires=[
         "click==8.1.3",
         "discord.py==2.0.1",
