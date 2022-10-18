@@ -23,3 +23,9 @@ class Daemon(discord.ext.commands.Bot):
     def run(self, *args: typing.Any, **kwargs: typing.Any) -> None:
         """Initializes the daemon process."""
         super().run(self.token, *args, **kwargs)
+
+    async def setup_hook(self) -> None:
+        """Hook method that is executed when the bot is ran which sets
+        sets up all of the extensions that need to be loaded.
+        """
+        await self.load_extension("dubilier.commands.example")

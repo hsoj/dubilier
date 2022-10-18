@@ -6,6 +6,8 @@ repos:
       entry: pytest
       language: system
       files: ^dubilier/
+      always_run: true
+      pass_filenames: false
     - id: pylint
       name: pylint
       entry: pylint
