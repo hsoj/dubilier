@@ -12,5 +12,6 @@ class Base(discord.ext.commands.Cog):
     within the command object.
     """
 
-    def __init__(self) -> None:
-        pass
+    def __init__(self, bot: discord.ext.commands.Bot) -> None:
+        super().__init__()
+        self.bot: discord.ext.commands.Bot = bot

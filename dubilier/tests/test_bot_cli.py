@@ -8,7 +8,7 @@ import dubilier.cli
 
 class TestBotCLI(unittest.TestCase):
 
-    @unittest.mock.patch("discord.ext.commands.Bot")
+    @unittest.mock.patch("dubilier.bot.discord.Daemon")
     def test_run(self, mock: unittest.mock.Mock) -> None:
         args: list[str] = [
             "bot",

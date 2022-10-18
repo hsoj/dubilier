@@ -24,6 +24,7 @@ setuptools.setup(
             "yapf==0.32.0",
             "pre-commit==2.20.0",
             "coverage==6.5.0",
+            "ipython==8.5.0",
         ]
     },
     entry_points={
