@@ -26,6 +26,6 @@ class Daemon(discord.ext.commands.Bot):
 
     async def setup_hook(self) -> None:
         """Hook method that is executed when the bot is ran which sets
-        sets up all of the extensions that need to be loaded.
+        up all of the extensions that need to be loaded.
         """
         await self.load_extension("dubilier.commands.example")
